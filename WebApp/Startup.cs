@@ -79,7 +79,7 @@ namespace WebApp
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Login}/{action=Index}/{id?}");
+                    pattern: "{controller=Task}/{action=Index}/{id?}");
             });
         }
     }

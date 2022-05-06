@@ -8,6 +8,7 @@ using Entities.Dtos;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace WebApp.Controllers
 {
@@ -30,6 +31,9 @@ namespace WebApp.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+            if (User.Claims.Count() > 0)
+                return RedirectToAction("Index", "Task");
+
             return View();
         }
 

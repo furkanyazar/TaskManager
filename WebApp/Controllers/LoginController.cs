@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -29,6 +30,9 @@ namespace WebApp.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+            if (User.Claims.Count() > 0)
+                return RedirectToAction("Index", "Task");
+
             return View();
         }
 
@@ -65,7 +69,7 @@ namespace WebApp.Controllers
 
                 await HttpContext.SignInAsync(claimsPrincipal);
 
-                return RedirectToAction("Index", "Register");
+                return RedirectToAction("Index", "Task");
             }
 
             foreach (var item in validation.Errors)
@@ -74,6 +78,13 @@ namespace WebApp.Controllers
             }
 
             return View();
+        }
+
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync();
+
+            return RedirectToAction("Index", "Task");
         }
     }
 }

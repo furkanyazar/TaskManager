@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewData["Title"] - Görev Yöneticisi</title>
+    <link rel="stylesheet" href="/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container-scroller">
+        <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+            <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+                <a class="navbar-brand brand-logo" asp-action="Index" asp-controller="Task">Görev Yöneticisi</a>
+                <a class="navbar-brand brand-logo-mini" asp-action="Index" asp-controller="Task">GY</a>
+            </div>
+            <div class="navbar-menu-wrapper d-flex align-items-stretch">
+                <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+                    <span class="mdi mdi-menu"></span>
+                </button>
+                <ul class="navbar-nav navbar-nav-right">
+                    <li class="nav-item nav-profile dropdown">
+                        <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+                            <div class="nav-profile-img">
+                                <img src="/img/profile/default.png" alt="image">
+                                <span class="availability-status online"></span>
+                            </div>
+                            <div class="nav-profile-text">
+                                <p class="mb-1 text-black">Furkan Yazar</p>
+                            </div>
+                        </a>
+                        <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
+                            <a class="dropdown-item" href="#">
+                                <i class="mdi mdi-cached mr-2 text-success"></i> Profilim
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" asp-action="Logout" asp-controller="Login">
+                                <i class="mdi mdi-logout mr-2 text-primary"></i> Çıkış Yap
+                            </a>
+                        </div>
+                    </li>
+                    <li class="nav-item nav-logout d-none d-lg-block">
+                        <a class="nav-link" asp-action="Logout" asp-controller="Login">
+                            <i class="mdi mdi-power"></i>
+                        </a>
+                    </li>
+                </ul>
+                <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+                    <span class="mdi mdi-menu"></span>
+                </button>
+            </div>
+        </nav>
+        <div class="container-fluid page-body-wrapper">
+            <nav class="sidebar sidebar-offcanvas" id="sidebar">
+                <ul class="nav">
+                    <li class="nav-item nav-profile">
+                        <a href="#" class="nav-link">
+                            <div class="nav-profile-image">
+                                <img src="/img/profile/default.png" alt="profile">
+                                <span class="login-status online"></span>
+                            </div>
+                            <div class="nav-profile-text d-flex flex-column">
+                                <span class="font-weight-bold mb-2">Furkan Yazar</span>
+                            </div>
+                            <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item @if (Context.Request.Path.Value == "/" || Context.Request.Path.Value == "/Task" || Context.Request.Path.Value == "/Task/Index")
+                                       {
+                                           Write("active");
+                                       }">
+                        <a class="nav-link" asp-action="Index" asp-controller="Task">
+                            <span class="menu-title">Ana Sayfa</span>
+                            <i class="mdi mdi-home menu-icon"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span class="menu-title">Günlük</span>
+                            <i class="mdi mdi-calendar-today menu-icon"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span class="menu-title">Haftalık</span>
+                            <i class="mdi mdi-calendar-week menu-icon"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span class="menu-title">Aylık</span>
+                            <i class="mdi mdi-calendar-month menu-icon"></i>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="main-panel">
+                <div class="content-wrapper">
+                    @RenderBody()
+                </div>
+                <footer class="footer">
+                    <div class="container-fluid clearfix">
+                        <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © Görev Yöneticisi @DateTime.Now.Year</span>
+                        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Developed by <a href="https://www.linkedin.com/in/furkanyazar/" target="_blank">Furkan Yazar</a></span>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </div>
+    <script src="/vendors/js/vendor.bundle.base.js"></script>
+    <script src="/js/off-canvas.js"></script>
+    <script src="/js/hoverable-collapse.js"></script>
+    <script src="/js/misc.js"></script>
+</body>
+</html>
