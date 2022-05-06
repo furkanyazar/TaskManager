@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Utilities.Security.Hashing;
 using Entities.Dtos;
@@ -42,14 +43,14 @@ namespace WebApp.Controllers
 
                 if (userToCheck is null)
                 {
-                    ModelState.AddModelError("Email", "E-posta hatalı");
+                    ModelState.AddModelError("Email", Messages.EmailIncorrect);
 
                     return View();
                 }
 
                 if (!HashingHelper.VerifyPasswordHash(userLoginDto.Password, userToCheck.PasswordHash, userToCheck.PasswordSalt))
                 {
-                    ModelState.AddModelError("Password", "Şifre hatalı");
+                    ModelState.AddModelError("Password", Messages.PasswordIncorrect);
 
                     return View();
                 }

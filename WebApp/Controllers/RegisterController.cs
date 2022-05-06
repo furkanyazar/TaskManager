@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Business.Abstract;
+using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Utilities.Security.Hashing;
 using Entities.Concrete;
@@ -39,6 +40,15 @@ namespace WebApp.Controllers
 
             if (validation.IsValid)
             {
+                var userToCheck = _userService.GetByUserEmail(userRegisterDto.Email);
+
+                if (userToCheck is not null)
+                {
+                    ModelState.AddModelError("Email", Messages.EmailAlreadyExists);
+
+                    return View();
+                }
+
                 HashingHelper.CreatePasswordHash(userRegisterDto.Password, out byte[] passwordHash, out byte[] passwordSalt);
 
                 var user = _mapper.Map<User>(userRegisterDto);

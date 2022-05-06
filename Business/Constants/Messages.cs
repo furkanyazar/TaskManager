@@ -11,5 +11,8 @@
         public static string FirstNameMinimumLength = "Ad en az 2 karakterden oluşmalı";
         public static string LastNameNotEmpty = "Soyad boş bırakılamaz";
         public static string LastNameMinimumLength = "Soyad en az 2 karakterden oluşmalı";
+        public static string EmailAlreadyExists = "E-posta zaten kullanılıyor";
+        public static string EmailIncorrect = "E-posta hatalı";
+        public static string PasswordIncorrect = "Şifre hatalı";
     }
 }
