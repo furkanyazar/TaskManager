@@ -5,19 +5,15 @@ using System.Linq;
 
 namespace Business.ValidationRules.FluentValidation
 {
-    public class UserRegisterDtoValidator : AbstractValidator<UserRegisterDto>
+    public class UserLoginDtoValidator : AbstractValidator<UserLoginDto>
     {
-        public UserRegisterDtoValidator()
+        public UserLoginDtoValidator()
         {
             RuleFor(x => x.Email).NotEmpty().WithMessage(Messages.EmailNotEmpty);
             RuleFor(x => x.Email).EmailAddress().WithMessage(Messages.InvalidEmailAddress);
             RuleFor(x => x.Password).NotEmpty().WithMessage(Messages.PasswordNotEmpty);
             RuleFor(x => x.Password).MinimumLength(8).WithMessage(Messages.PasswordMinimumLength);
             RuleFor(x => x.Password).Must(ContainLetterAndNumber).WithMessage(Messages.PasswordMustContainLetterAndNumber);
-            RuleFor(x => x.FirstName).NotEmpty().WithMessage(Messages.FirstNameNotEmpty);
-            RuleFor(x => x.FirstName).MinimumLength(2).WithMessage(Messages.FirstNameMinimumLength);
-            RuleFor(x => x.LastName).NotEmpty().WithMessage(Messages.LastNameNotEmpty);
-            RuleFor(x => x.LastName).MinimumLength(2).WithMessage(Messages.LastNameMinimumLength);
         }
 
         private bool ContainLetterAndNumber(string arg)
