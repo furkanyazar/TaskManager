@@ -3,6 +3,7 @@ using Core.Business;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Business.Concrete
 {
@@ -14,7 +15,7 @@ namespace Business.Concrete
 
         public List<Task> GetAllByTypeIdAndUserId(int typeId, int userId)
         {
-            return _tdal.GetAll(x => x.TaskTypeId == typeId && x.UserId == userId);
+            return _tdal.GetAll(x => x.TaskTypeId == typeId && x.UserId == userId).OrderBy(x => x.DateOfInsert).ToList();
         }
 
         public Task GetById(int id)

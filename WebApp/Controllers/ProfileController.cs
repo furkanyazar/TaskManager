@@ -19,7 +19,7 @@ namespace WebApp.Controllers
 
         private IMapper _mapper;
 
-        private UserDetailDtoValidator validator = new();
+        private UserRegisterDtoValidator validator = new();
         private ValidationResult validation;
 
         public ProfileController(IUserService userService, IMapper mapper)
@@ -49,7 +49,9 @@ namespace WebApp.Controllers
             if (userDetailDto.ImageUrl is null)
                 userDetailDto.ImageUrl = oldUser.ImageUrl;
 
-            validation = validator.Validate(userDetailDto);
+            var userToValidate = _mapper.Map<UserRegisterDto>(userDetailDto);
+
+            validation = validator.Validate(userToValidate);
 
             if (validation.IsValid)
             {
@@ -59,7 +61,7 @@ namespace WebApp.Controllers
                 {
                     ModelState.AddModelError("Email", Messages.EmailAlreadyExists);
 
-                    return View();
+                    return View(userDetailDto);
                 }
 
                 if (Request.Form.Files["UserImage"] is not null)
@@ -101,7 +103,7 @@ namespace WebApp.Controllers
                 ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
             }
 
-            return View();
+            return View(userDetailDto);
         }
 
         public IActionResult DeletePhoto()

@@ -8,10 +8,10 @@ namespace WebApp.Common
     {
         public MappingProfile()
         {
-            // User
             CreateMap<UserRegisterDto, User>();
             CreateMap<User, UserDetailDto>();
             CreateMap<UserDetailDto, User>();
+            CreateMap<UserDetailDto, UserRegisterDto>();
         }
     }
 }
