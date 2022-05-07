@@ -23,7 +23,7 @@
                     data: task,
                     success: function (response) {
                         if (response.success) {
-                            todoListItemDaily.append("<li value='" + response.id + "'><div class='form-check'><label class='form-check-label'><input class='checkbox' type='checkbox'/>" + item + "<i class='input-helper'></i></label></div><i class='update mdi mdi-rename-box'></i><i class='remove mdi mdi-close-circle-outline ml-1'></i></li>");
+                            todoListItemDaily.append("<li value='" + response.id + "'><div class='form-check'><label class='form-check-label'><input class='checkbox' type='checkbox'/>" + item + "<i class='input-helper'></i></label></div><i class='update mdi mdi-pencil'></i><i class='remove mdi mdi-close-circle-outline ml-1'></i></li>");
                             todoListInputDaily.val("");
                         } else {
                             swal("", response.message, "error");
@@ -56,7 +56,7 @@
                     data: task,
                     success: function (response) {
                         if (response.success) {
-                            todoListItemWeekly.append("<li value='" + response.id + "'><div class='form-check'><label class='form-check-label'><input class='checkbox' type='checkbox'/>" + item + "<i class='input-helper'></i></label></div><i class='update mdi mdi-rename-box'></i><i class='remove mdi mdi-close-circle-outline ml-1'></i></li>");
+                            todoListItemWeekly.append("<li value='" + response.id + "'><div class='form-check'><label class='form-check-label'><input class='checkbox' type='checkbox'/>" + item + "<i class='input-helper'></i></label></div><i class='update mdi mdi-pencil'></i><i class='remove mdi mdi-close-circle-outline ml-1'></i></li>");
                             todoListInputWeekly.val("");
                         } else {
                             swal("", response.message, "error");
@@ -89,7 +89,7 @@
                     data: task,
                     success: function (response) {
                         if (response.success) {
-                            todoListItemMonthly.append("<li value='" + response.id + "'><div class='form-check'><label class='form-check-label'><input class='checkbox' type='checkbox'/>" + item + "<i class='input-helper'></i></label></div><i class='update mdi mdi-rename-box'></i><i class='remove mdi mdi-close-circle-outline ml-1'></i></li>");
+                            todoListItemMonthly.append("<li value='" + response.id + "'><div class='form-check'><label class='form-check-label'><input class='checkbox' type='checkbox'/>" + item + "<i class='input-helper'></i></label></div><i class='update mdi mdi-pencil'></i><i class='remove mdi mdi-close-circle-outline ml-1'></i></li>");
                             todoListInputMonthly.val("");
                         } else {
                             swal("", response.message, "error");
@@ -138,7 +138,7 @@
                     var itemToDelete = $(this).parent();
 
                     $.ajax({
-                        url: "/Task/Delete?id=" + $(this).parent().val(),
+                        url: "/Task/Delete?id=" + itemToDelete.val(),
                         type: "post",
                         success: function (response) {
                             if (response.success) {

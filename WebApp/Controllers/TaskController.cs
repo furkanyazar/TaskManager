@@ -66,13 +66,19 @@ namespace WebApp.Controllers
             if (result is null)
                 return Json(new { success = false, message = Messages.TaskNotFound });
 
+            task.DateOfDeadline = result.DateOfDeadline;
+            task.DateOfInsert = result.DateOfInsert;
+            task.Status = result.Status;
+            task.TaskTypeId = result.TaskTypeId;
+            task.UserId = result.UserId;
+
             validation = validator.Validate(task);
 
             if (validation.IsValid)
             {
                 _taskService.Update(task);
 
-                return Json(new { success = true });
+                return Json(new { success = true, status = task.Status });
             }
 
             return Json(new { success = false, message = validation.Errors[0].ErrorMessage });
