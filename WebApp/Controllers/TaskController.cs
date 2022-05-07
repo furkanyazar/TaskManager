@@ -90,6 +90,20 @@ namespace WebApp.Controllers
             return Json(new { success = true });
         }
 
+        public IActionResult Succeed(int id)
+        {
+            var result = _taskService.GetById(id);
+
+            if (result is null)
+                return Json(new { success = false, message = Messages.TaskNotFound });
+
+            result.Status = !result.Status;
+
+            _taskService.Update(result);
+
+            return Json(new { success = true });
+        }
+
         public IActionResult Index()
         {
             return View();

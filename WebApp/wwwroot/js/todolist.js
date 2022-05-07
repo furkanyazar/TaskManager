@@ -103,14 +103,28 @@
         });
 
         todoListItem.on('change', '.checkbox', function () {
-            if ($(this).attr('checked')) {
-                $(this).removeAttr('checked');
-            } else {
-                $(this).attr('checked', 'checked');
-            }
+            var itemToChange = $(this);
 
-            $(this).closest("li").toggleClass('completed');
+            $.ajax({
+                url: "/Task/Succeed?id=" + itemToChange.parent().parent().parent().val(),
+                type: "post",
+                success: function (response) {
+                    if (response.success) {
+                        if (itemToChange.attr('checked')) {
+                            itemToChange.removeAttr('checked');
+                        } else {
+                            itemToChange.attr('checked', 'checked');
+                        }
 
+                        itemToChange.closest("li").toggleClass('completed');
+                    } else {
+                        swal("", response.message, "error");
+                    }
+                },
+                error: function () {
+                    swal("", "Bir hata oluþtu", "error");
+                }
+            });
         });
 
         todoListItem.on('click', '.remove', function () {
