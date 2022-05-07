@@ -16,7 +16,10 @@ namespace WebApp.ViewComponents
 
         public IViewComponentResult Invoke()
         {
-            var result = _taskService.GetAllByTypeIdAndUserId(3, Convert.ToInt32(HttpContext.User.Claims.SingleOrDefault().Value)).OrderBy(x => x.DateOfInsert).ToList();
+            var month = DateTime.Now.Month;
+            var year = DateTime.Now.Year;
+
+            var result = _taskService.GetAllByTypeIdAndUserId(3, Convert.ToInt32(HttpContext.User.Claims.SingleOrDefault().Value)).Where(x => x.DateOfInsert.Year == year && x.DateOfInsert.Month == month && x.DateOfDeadline == new DateTime(year, month, DateTime.DaysInMonth(year, month)).AddDays(1)).ToList();
 
             return View(result);
         }
