@@ -12,7 +12,7 @@
                 <ul class="d-flex flex-column-reverse todo-list todo-list-custom" name="weekly">
                     @foreach (var item in Model)
                     {
-                        <li class="@if (item.Status)
+                        <li value="@item.TaskId" class="@if (item.Status)
                                 {
                                     Write("completed");
                                 }">

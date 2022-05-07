@@ -23,7 +23,7 @@
                     data: task,
                     success: function (response) {
                         if (response.success) {
-                            todoListItemDaily.append("<li><div class='form-check'><label class='form-check-label'><input class='checkbox' type='checkbox'/>" + item + "<i class='input-helper'></i></label></div><i class='update mdi mdi-rename-box'></i><i class='remove mdi mdi-close-circle-outline ml-1'></i></li>");
+                            todoListItemDaily.append("<li value='" + response.id + "'><div class='form-check'><label class='form-check-label'><input class='checkbox' type='checkbox'/>" + item + "<i class='input-helper'></i></label></div><i class='update mdi mdi-rename-box'></i><i class='remove mdi mdi-close-circle-outline ml-1'></i></li>");
                             todoListInputDaily.val("");
                         } else {
                             swal("", response.message, "error");
@@ -56,7 +56,7 @@
                     data: task,
                     success: function (response) {
                         if (response.success) {
-                            todoListItemWeekly.append("<li><div class='form-check'><label class='form-check-label'><input class='checkbox' type='checkbox'/>" + item + "<i class='input-helper'></i></label></div><i class='update mdi mdi-rename-box'></i><i class='remove mdi mdi-close-circle-outline ml-1'></i></li>");
+                            todoListItemWeekly.append("<li value='" + response.id + "'><div class='form-check'><label class='form-check-label'><input class='checkbox' type='checkbox'/>" + item + "<i class='input-helper'></i></label></div><i class='update mdi mdi-rename-box'></i><i class='remove mdi mdi-close-circle-outline ml-1'></i></li>");
                             todoListInputWeekly.val("");
                         } else {
                             swal("", response.message, "error");
@@ -89,7 +89,7 @@
                     data: task,
                     success: function (response) {
                         if (response.success) {
-                            todoListItemMonthly.append("<li><div class='form-check'><label class='form-check-label'><input class='checkbox' type='checkbox'/>" + item + "<i class='input-helper'></i></label></div><i class='update mdi mdi-rename-box'></i><i class='remove mdi mdi-close-circle-outline ml-1'></i></li>");
+                            todoListItemMonthly.append("<li value='" + response.id + "'><div class='form-check'><label class='form-check-label'><input class='checkbox' type='checkbox'/>" + item + "<i class='input-helper'></i></label></div><i class='update mdi mdi-rename-box'></i><i class='remove mdi mdi-close-circle-outline ml-1'></i></li>");
                             todoListInputMonthly.val("");
                         } else {
                             swal("", response.message, "error");
@@ -114,7 +114,31 @@
         });
 
         todoListItem.on('click', '.remove', function () {
-            $(this).parent().remove();
+            swal({
+                text: "Görev silinsin mi?",
+                icon: "warning",
+                buttons: ["Ýptal", "Tamam"],
+                dangerMode: true,
+            }).then((willDelete) => {
+                if (willDelete) {
+                    var itemToDelete = $(this).parent();
+
+                    $.ajax({
+                        url: "/Task/Delete?id=" + $(this).parent().val(),
+                        type: "post",
+                        success: function (response) {
+                            if (response.success) {
+                                itemToDelete.remove();
+                            } else {
+                                swal("", response.message, "error");
+                            }
+                        },
+                        error: function () {
+                            swal("", "Bir hata oluþtu", "error");
+                        }
+                    });
+                }
+            });
         });
 
     });

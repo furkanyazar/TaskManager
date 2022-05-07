@@ -51,7 +51,9 @@ namespace WebApp.Controllers
             {
                 _taskService.Add(task);
 
-                return Json(new { success = true });
+                var result = _taskService.GetAll().LastOrDefault();
+
+                return Json(new { success = true, id = result.TaskId });
             }
 
             return Json(new { success = false, message = validation.Errors[0].ErrorMessage });
