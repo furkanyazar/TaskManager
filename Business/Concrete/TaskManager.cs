@@ -16,5 +16,10 @@ namespace Business.Concrete
         {
             return _tdal.GetAll(x => x.TaskTypeId == typeId && x.UserId == userId);
         }
+
+        public Task GetById(int id)
+        {
+            return _tdal.Get(x => x.TaskId == id);
+        }
     }
 }

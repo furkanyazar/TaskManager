@@ -5,11 +5,11 @@
         <div class="card-body">
             <h4 class="card-title">Aylık Görevler</h4>
             <div class="add-items d-flex">
-                <input type="text" class="form-control todo-list-input" placeholder="Görev">
-                <button class="add btn btn-gradient-primary font-weight-bold todo-list-add-btn" id="add-task">Add</button>
+                <input type="text" class="form-control todo-list-input" placeholder="Görev" name="monthly">
+                <button class="add btn btn-gradient-primary font-weight-bold todo-list-add-btn" id="add-task" name="monthly">Ekle</button>
             </div>
             <div class="list-wrapper">
-                <ul class="d-flex flex-column-reverse todo-list todo-list-custom">
+                <ul class="d-flex flex-column-reverse todo-list todo-list-custom" name="monthly">
                     @foreach (var item in Model)
                     {
                         <li class="@if (item.Status)

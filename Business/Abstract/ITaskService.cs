@@ -7,5 +7,7 @@ namespace Business.Abstract
     public interface ITaskService : IEntityService<Task>
     {
         List<Task> GetAllByTypeIdAndUserId(int typeId, int userId);
+
+        Task GetById(int id);
     }
 }
