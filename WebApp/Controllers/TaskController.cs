@@ -8,5 +8,20 @@ namespace WebApp.Controllers
         {
             return View();
         }
+
+        public IActionResult Daily()
+        {
+            return View();
+        }
+
+        public IActionResult Weekly()
+        {
+            return View();
+        }
+
+        public IActionResult Monthly()
+        {
+            return View();
+        }
     }
 }

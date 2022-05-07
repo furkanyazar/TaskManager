@@ -1,0 +1,36 @@
+﻿@model List<Entities.Concrete.Task>
+
+<div class="col-md-4 grid-margin stretch-card mx-auto">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Aylık Görevler</h4>
+            <div class="add-items d-flex">
+                <input type="text" class="form-control todo-list-input" placeholder="Görev">
+                <button class="add btn btn-gradient-primary font-weight-bold todo-list-add-btn" id="add-task">Add</button>
+            </div>
+            <div class="list-wrapper">
+                <ul class="d-flex flex-column-reverse todo-list todo-list-custom">
+                    @foreach (var item in Model)
+                    {
+                        <li class="@if (item.Status)
+                                {
+                                    Write("completed");
+                                }">
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input class="checkbox" type="checkbox" @if (item.Status)
+                                                                           {
+                                                                               Write("checked");
+                                                                           }>
+                                    @item.Description
+                                </label>
+                            </div>
+                            <i class="update mdi mdi-rename-box"></i>
+                            <i class="remove mdi mdi-close-circle-outline ml-1"></i>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

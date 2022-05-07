@@ -2,3 +2,10 @@
     ViewData["Title"] = "Görevler";
     Layout = "~/Views/Shared/_TaskLayout.cshtml";
 }
+
+<div class="row">
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @await Component.InvokeAsync("DailyTasks")
+    @await Component.InvokeAsync("WeeklyTasks")
+    @await Component.InvokeAsync("MonthlyTasks")
+</div>

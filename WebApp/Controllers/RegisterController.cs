@@ -59,6 +59,7 @@ namespace WebApp.Controllers
 
                 user.PasswordHash = passwordHash;
                 user.PasswordSalt = passwordSalt;
+                user.ImageUrl = Defaults.DEFAULT_AVATAR_URL;
 
                 _userService.Add(user);
 

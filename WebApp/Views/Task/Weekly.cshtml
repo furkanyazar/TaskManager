@@ -1,0 +1,8 @@
+﻿@{
+    ViewData["Title"] = "Haftalık Görevler";
+    Layout = "~/Views/Shared/_TaskLayout.cshtml";
+}
+
+<div class="row">
+    @await Component.InvokeAsync("WeeklyTasks")
+</div>

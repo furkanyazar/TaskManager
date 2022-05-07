@@ -1,4 +1,5 @@
 ﻿using Core.Entities.Abstract;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Entities.Concrete
@@ -15,5 +16,7 @@ namespace Entities.Concrete
         public byte[] PasswordSalt { get; set; }
         public bool Status { get; set; } = true;
         public string ImageUrl { get; set; }
+
+        public List<Task> Tasks { get; set; }
     }
 }

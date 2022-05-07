@@ -11,5 +11,7 @@ namespace DataAccess.Concrete
         }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<Task> Tasks { get; set; }
+        public DbSet<TaskType> TaskTypes { get; set; }
     }
 }
