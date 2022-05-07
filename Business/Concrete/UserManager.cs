@@ -11,6 +11,11 @@ namespace Business.Concrete
         {
         }
 
+        public User GetById(int id)
+        {
+            return _tdal.Get(x => x.UserId == id);
+        }
+
         public User GetByUserEmail(string email)
         {
             return _tdal.GetByUserEmail(email);
