@@ -10,7 +10,7 @@ namespace Entities.Concrete
         public int TaskId { get; set; }
 
         public string Description { get; set; }
-        public DateTime DateOfInsert { get; set; } = DateTime.Now;
+        public DateTime DateOfInsert { get; set; } = DateTime.Now.AddHours(3);
         public DateTime DateOfDeadline { get; set; }
         public bool Status { get; set; } = false;
 

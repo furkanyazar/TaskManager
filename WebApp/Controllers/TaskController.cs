@@ -42,8 +42,6 @@ namespace WebApp.Controllers
 
         public IActionResult AddWeekly(Task task)
         {
-            var monday = DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek + (int)DayOfWeek.Monday);
-
             task.UserId = Convert.ToInt32(HttpContext.User.Claims.SingleOrDefault(x => x.Type == "UserId").Value);
             task.DateOfDeadline = DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek + (int)DayOfWeek.Monday);
 
