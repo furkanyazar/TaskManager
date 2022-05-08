@@ -14,9 +14,6 @@ namespace Entities.Concrete
         public DateTime DateOfDeadline { get; set; }
         public bool Status { get; set; } = false;
 
-        public int TaskTypeId { get; set; }
-        public TaskType TaskType { get; set; }
-
         public int UserId { get; set; }
         public User User { get; set; }
     }

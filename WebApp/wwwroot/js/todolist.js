@@ -18,7 +18,7 @@
                 };
 
                 $.ajax({
-                    url: "/Task/Add",
+                    url: "/Task/AddDaily",
                     type: "post",
                     data: task,
                     success: function (response) {
@@ -51,7 +51,7 @@
                 };
 
                 $.ajax({
-                    url: "/Task/Add",
+                    url: "/Task/AddWeekly",
                     type: "post",
                     data: task,
                     success: function (response) {
@@ -84,7 +84,7 @@
                 };
 
                 $.ajax({
-                    url: "/Task/Add",
+                    url: "/Task/AddMonthly",
                     type: "post",
                     data: task,
                     success: function (response) {

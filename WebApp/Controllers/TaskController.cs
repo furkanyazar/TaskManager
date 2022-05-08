@@ -21,29 +21,53 @@ namespace WebApp.Controllers
             _taskService = taskService;
         }
 
-        public IActionResult Add(Task task)
+        public IActionResult AddDaily(Task task)
         {
             task.UserId = Convert.ToInt32(HttpContext.User.Claims.SingleOrDefault(x => x.Type == "UserId").Value);
+            task.DateOfDeadline = DateTime.Today.AddDays(1);
 
-            switch (task.TaskTypeId)
+            validation = validator.Validate(task);
+
+            if (validation.IsValid)
             {
-                case 1:
-                    task.DateOfDeadline = DateTime.Today.AddDays(1);
-                    break;
-                case 2:
-                    DateTime startOfNextWeek = DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek + 8);
-                    task.DateOfDeadline = startOfNextWeek;
-                    break;
-                case 3:
-                    var year = DateTime.Now.Year;
-                    var month = DateTime.Now.Month;
-                    DateTime startOfNextMonth = new DateTime(year, month, DateTime.DaysInMonth(year, month)).AddDays(1);
-                    task.DateOfDeadline = startOfNextMonth;
-                    break;
-                default:
-                    task.DateOfDeadline = DateTime.Today.AddDays(1);
-                    break;
+                _taskService.Add(task);
+
+                var result = _taskService.GetAll().LastOrDefault();
+
+                return Json(new { success = true, id = result.TaskId });
             }
+
+            return Json(new { success = false, message = validation.Errors[0].ErrorMessage });
+        }
+
+        public IActionResult AddWeekly(Task task)
+        {
+            var monday = DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek + (int)DayOfWeek.Monday);
+
+            task.UserId = Convert.ToInt32(HttpContext.User.Claims.SingleOrDefault(x => x.Type == "UserId").Value);
+            task.DateOfDeadline = DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek + (int)DayOfWeek.Monday);
+
+            validation = validator.Validate(task);
+
+            if (validation.IsValid)
+            {
+                _taskService.Add(task);
+
+                var result = _taskService.GetAll().LastOrDefault();
+
+                return Json(new { success = true, id = result.TaskId });
+            }
+
+            return Json(new { success = false, message = validation.Errors[0].ErrorMessage });
+        }
+
+        public IActionResult AddMonthly(Task task)
+        {
+            var year = DateTime.Now.Year;
+            var month = DateTime.Now.Month;
+
+            task.UserId = Convert.ToInt32(HttpContext.User.Claims.SingleOrDefault(x => x.Type == "UserId").Value);
+            task.DateOfDeadline = new DateTime(year, month, DateTime.DaysInMonth(year, month)).AddDays(1);
 
             validation = validator.Validate(task);
 
@@ -69,7 +93,6 @@ namespace WebApp.Controllers
             task.DateOfDeadline = result.DateOfDeadline;
             task.DateOfInsert = result.DateOfInsert;
             task.Status = result.Status;
-            task.TaskTypeId = result.TaskTypeId;
             task.UserId = result.UserId;
 
             validation = validator.Validate(task);

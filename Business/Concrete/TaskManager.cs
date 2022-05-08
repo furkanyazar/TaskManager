@@ -13,9 +13,9 @@ namespace Business.Concrete
         {
         }
 
-        public List<Task> GetAllByTypeIdAndUserId(int typeId, int userId)
+        public List<Task> GetAllByUserId(int userId)
         {
-            return _tdal.GetAll(x => x.TaskTypeId == typeId && x.UserId == userId).OrderBy(x => x.DateOfInsert).ToList();
+            return _tdal.GetAll(x => x.UserId == userId).OrderBy(x => x.DateOfInsert).ToList();
         }
 
         public Task GetById(int id)
