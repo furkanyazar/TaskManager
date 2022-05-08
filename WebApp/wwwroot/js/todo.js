@@ -18,6 +18,8 @@
                 closeModal: false,
             },
         }).then(name => {
+            if (!name) throw null;
+
             var task = {
                 Description: name,
                 TaskId: itemToEdit.val(),
