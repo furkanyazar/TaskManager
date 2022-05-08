@@ -16,7 +16,7 @@ namespace WebApp.ViewComponents
 
         public IViewComponentResult Invoke()
         {
-            var result = _taskService.GetAllByUserId(Convert.ToInt32(HttpContext.User.Claims.SingleOrDefault().Value)).Where(x => x.DateOfInsert.Date == DateTime.Today && x.DateOfDeadline == DateTime.Today.AddDays(1)).ToList();
+            var result = _taskService.GetAllByUserId(Convert.ToInt32(HttpContext.User.Claims.SingleOrDefault().Value)).Where(x => x.DateOfInsert.Date == DateTime.Now.AddHours(3).Date && x.DateOfDeadline == DateTime.Now.AddHours(3).Date.AddDays(1)).ToList();
 
             return View(result);
         }

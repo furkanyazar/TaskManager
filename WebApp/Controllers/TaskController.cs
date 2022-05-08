@@ -24,7 +24,7 @@ namespace WebApp.Controllers
         public IActionResult AddDaily(Task task)
         {
             task.UserId = Convert.ToInt32(HttpContext.User.Claims.SingleOrDefault(x => x.Type == "UserId").Value);
-            task.DateOfDeadline = DateTime.Today.AddDays(1);
+            task.DateOfDeadline = DateTime.Now.AddHours(3).Date.AddDays(1);
 
             validation = validator.Validate(task);
 
@@ -43,7 +43,7 @@ namespace WebApp.Controllers
         public IActionResult AddWeekly(Task task)
         {
             task.UserId = Convert.ToInt32(HttpContext.User.Claims.SingleOrDefault(x => x.Type == "UserId").Value);
-            task.DateOfDeadline = DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek + (int)DayOfWeek.Monday);
+            task.DateOfDeadline = DateTime.Now.AddHours(3).Date.AddDays(-(int)DateTime.Now.AddHours(3).Date.DayOfWeek + (int)DayOfWeek.Monday + 7);
 
             validation = validator.Validate(task);
 
@@ -61,8 +61,8 @@ namespace WebApp.Controllers
 
         public IActionResult AddMonthly(Task task)
         {
-            var year = DateTime.Now.Year;
-            var month = DateTime.Now.Month;
+            var year = DateTime.Now.AddHours(3).Year;
+            var month = DateTime.Now.AddHours(3).Month;
 
             task.UserId = Convert.ToInt32(HttpContext.User.Claims.SingleOrDefault(x => x.Type == "UserId").Value);
             task.DateOfDeadline = new DateTime(year, month, DateTime.DaysInMonth(year, month)).AddDays(1);
