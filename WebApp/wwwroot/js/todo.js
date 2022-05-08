@@ -46,6 +46,8 @@
                     swal("", "Bir hata oluþtu", "error");
                 }
             });
-        });
+        }).catch(err => {
+            swal.close();
+        });;
     });
 })(jQuery);
