@@ -24,3 +24,11 @@
         Hesabın yok mu? <a asp-action="Index" asp-controller="Register" class="text-primary">Kayıt ol</a>
     </div>
 }
+<br />
+<br />
+<p><a href="#" id="demoUsers">Demo Kullanıcı</a></p>
+<script>
+	$( "#demoUsers" ).click(function() {
+		swal("Demo Kullanıcı", "E-posta: ahmet@mail.com\nŞifre: ahmet123");
+	});
+</script>
